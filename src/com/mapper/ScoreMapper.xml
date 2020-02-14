@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ScoreMapper">
+
+	
+	<select id="selectAll" resultType="Score" >
+	SELECT sc.*,s.sname,c.cname FROM student s ,course c ,score  sc WHERE sc.sid=s.sid AND sc.cid=c.cid 
+	</select>
+
+
+	<insert id="insert" parameterType="Score">
+	insert into score values( #{sid} , #{cid} , #{score})
+	</insert>
+
+	<delete id="delete" parameterType="Integer">
+	delete from score where sid = #{sid} and cid = #{cid}
+	</delete>
+</mapper>

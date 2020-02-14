@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StudentMapper">
+	 <resultMap type="Student" id="studentMap">
+		<id property="sid" column="sid"/>
+		<result property="sname" column="sname"/>
+		<!-- <result property="class_id" column="class_id"/> -->
+		<result property="sex" column="sex"/>
+		<result property="age" column="age"/>
+		
+		<association property="address" column="address_id" select="com.dao.AddressMapper.selectAddressById"></association>
+		<association property="class_id" column="class_id" select="com.dao.GradeMapper.selectGradeById"></association>
+	</resultMap>
+	
+
+	<insert id="insert" parameterType="Student" >
+	insert into student values(null, #{sname} ,#{cid}, #{sex} , #{age} , #{aid} )
+	</insert>
+	<delete id="delete" parameterType="Integer">
+	delete from student where sid=#{sid}
+	</delete>
+	
+	<select id="selectById" resultMap="studentMap" parameterType="Integer" >
+		select * from student where sid = #{sid}
+	</select>
+	
+	<select id="selectStudentByClass_id" parameterType="Integer" resultMap="studentMap">
+		select * from student where class_id = #{cid}
+	</select>
+	<select id="selectAll" resultMap="studentMap">
+		select * from student;
+	</select> 
+	
+
+	
+
+</mapper>
